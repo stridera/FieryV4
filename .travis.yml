@@ -29,7 +29,6 @@ jobs:
       env:
         - GCC_VER="9"
         - MATRIX_EVAL="CC=gcc-${GCC_VER} && CXX=g++-${GCC_VER}"
-
       addons:
         apt:
           sources:
@@ -39,6 +38,7 @@ jobs:
             - gcc-9
             - g++-9
             - doxygen
+            - libboost-dev
             - libasio-dev
       after_script:
         - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-${GCC_VER}
@@ -51,6 +51,7 @@ jobs:
         apt:
           packages:
             - doxygen
+            - libboost-dev
             - libasio-dev
 before_script:
   - eval "${MATRIX_EVAL}"
