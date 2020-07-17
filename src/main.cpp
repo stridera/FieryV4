@@ -15,7 +15,6 @@ static constexpr auto USAGE =
           -h --help     Show this screen.
           --version     Show version.
           --port=<port>  Port [default: 4000].
-  target_compile_options(project_warnings
 )";
 
 int main(int argc, const char **argv)
