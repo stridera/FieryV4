@@ -3,8 +3,8 @@
 #include <string>
 
 #include "constants.hpp"
-#include <boost/asio.hpp>
 #include "server/server.hpp"
+#include <boost/asio.hpp>
 
 enum class GameState {
   BOOTING,

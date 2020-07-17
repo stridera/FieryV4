@@ -21,9 +21,13 @@ jobs:
         # We'll use this as our working directory for all subsequent commands
         run: cmake -E make_directory ${{runner.workspace}}/build
 
-      - name: Install Boost-Asio
+      - name: Install Boost PPA
         shell: bash
-        run: sudo apt update && sudo apt install -yq libasio-dev
+        run: sudo add-apt-repository ppa:mhier/libboost-latest
+
+      - name: Install Boost/Asio
+        shell: bash
+        run: sudo apt update && sudo apt install -yq libboost1.70-dev, libasio-dev
 
       - name: Install conan
         shell: bash

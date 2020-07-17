@@ -10,7 +10,16 @@ add_executable(fierymud
   server/server.cpp
   server/session.cpp
   )
-  
+
+if (WERROR)
+  target_compile_options(fierymud PRIVATE ${WERROR_FLAG})
+  message(STATUS "Using Error Flags: ${WERROR_FLAG}")
+endif ()
+if (PEDANTIC)
+  target_compile_options(fierymud PRIVATE ${PEDANTIC_COMPILE_FLAGS})
+    message(STATUS "Using Pedantic Flags: ${PEDANTIC_COMPILE_FLAGS}")
+endif ()
+
 target_link_libraries(
   fierymud
   PRIVATE project_options
