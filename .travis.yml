@@ -1,7 +1,15 @@
 language: cpp
 
+addons:
+  apt:
+    packages: 
+      - libasio-dev
+  homebrew:
+    update: true
+    packages:
+      - asio
+      
 install:
-  - sudo apt-get install libasio-dev
   - pip install --user conan cmake
 
 jobs:
