@@ -1,7 +1,7 @@
 language: cpp
 
 install:
-  - sudo apt install libasio-dev
+  - sudo apt-get install libasio-dev
   - pip install --user conan cmake
 
 jobs:
