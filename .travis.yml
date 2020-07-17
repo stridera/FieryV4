@@ -39,7 +39,7 @@ jobs:
             - gcc-9
             - g++-9
             - doxygen
-            - libboost-dev
+            - libboost1.70-dev
             - libasio-dev
       after_script:
         - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-${GCC_VER}
@@ -54,7 +54,7 @@ jobs:
             - sourceline: "ppa:mhier/libboost-latest"
           packages:
             - doxygen
-            - libboost-dev
+            - libboost1.70-dev
             - libasio-dev
 before_script:
   - eval "${MATRIX_EVAL}"
