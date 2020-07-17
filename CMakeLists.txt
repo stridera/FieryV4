@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Set the project name to your project name, my project isn't very descriptive
-project(myproject CXX)
+project(fierymud CXX)
 include(cmake/StandardProjectSettings.cmake)
 include(cmake/PreventInSourceBuilds.cmake)
 
@@ -15,6 +15,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     add_compile_definitions(project_options INTERFACE -ftime-trace)
   endif()
 endif()
+
+# Setup Boost for asio library
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.71 REQUIRED)
+message(STATUS "Boost version: ${Boost_VERSION}")
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
@@ -91,5 +98,5 @@ add_subdirectory(src)
 option(ENABLE_UNITY "Enable Unity builds of projects" OFF)
 if(ENABLE_UNITY)
   # Add for any project you want to apply unity builds for
-  set_target_properties(intro PROPERTIES UNITY_BUILD ON)
+  set_target_properties(fierymud PROPERTIES UNITY_BUILD ON)
 endif()
