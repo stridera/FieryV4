@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Boost/Asio
         shell: bash
-        run: sudo add-apt-repository ppa:mhier/libboost-latest && sudo apt update && sudo apt install -yq libboost1.70-dev, libasio-dev
+        run: sudo apt update && sudo apt install -yq libboost-dev, libasio-dev
 
       - name: Install conan
         shell: bash
