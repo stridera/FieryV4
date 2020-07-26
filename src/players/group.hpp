@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+namespace Mud::Group {
 
 class Player;
 
@@ -14,3 +15,5 @@ public:
   Group();
   ~Group() = default;
 };
+
+}

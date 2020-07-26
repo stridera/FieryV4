@@ -10,6 +10,8 @@
 #include "../players/player.hpp"
 #include "exits.hpp"
 
+namespace Mud::Room {
+
 class Zone;
 
 enum class RoomFlag {
@@ -38,14 +40,16 @@ class Room : BaseObject
 {
 private:
   std::shared_ptr<Zone> zone_;
-  std::vector<Exit> exits_;
+  std::vector<Exit::Exit> exits_;
   std::unordered_map<std::string, std::string> extra_descriptions_;
   std::vector<RoomFlag> flags_;
 
-  std::vector<std::shared_ptr<Player>> players_;
-  std::vector<std::shared_ptr<Object>> objects_;
+  std::vector<std::shared_ptr<Player::Player>> players_;
+  std::vector<std::shared_ptr<Object::Object>> objects_;
 
 public:
   Room() = default;
   ~Room() = default;
 };
+
+}

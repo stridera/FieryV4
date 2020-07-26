@@ -4,6 +4,8 @@
 
 #include "../base_object.hpp"
 
+namespace Mud::Player {
+
 class Room;
 
 class Player : BaseObject
@@ -16,3 +18,5 @@ public:
   Player() = default;
   ~Player() = default;
 };
+
+}

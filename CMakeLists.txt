@@ -67,7 +67,7 @@ endif ()
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost 1.66 REQUIRED)
+find_package(Boost 1.65 REQUIRED)
 message(STATUS "Boost version: ${Boost_VERSION}")
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake

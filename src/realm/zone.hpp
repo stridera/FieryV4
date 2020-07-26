@@ -5,6 +5,9 @@
 #include "room.hpp"
 #include "weather.hpp"
 
+namespace Mud::Zone {
+
+
 class Zone : BaseObject
 {
 private:
@@ -12,9 +15,11 @@ private:
   unsigned int age;
   Weather weather;
 
-  std::vector<Room> _rooms;
+  std::vector<Room::Room> _rooms;
 
 public:
   Zone();
   ~Zone() = default;
 };
+
+}

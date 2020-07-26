@@ -1,8 +1,10 @@
 #include "config.hpp"
 #include "fiery.hpp"
+#include "logging/log.hpp"
 #include <docopt/docopt.h>
 #include <functional>
 #include <iostream>
+#include <map>
 
 
 static constexpr auto USAGE =
@@ -15,6 +17,7 @@ static constexpr auto USAGE =
           -h --help     Show this screen.
           --version     Show version.
           --port=<port>  Port [default: 4000].
+          --api_port=<api_port>  Api Port [default: 5000]
 )";
 
 int main(int argc, const char **argv)
@@ -33,15 +36,19 @@ int main(int argc, const char **argv)
     }
   }
 
-  std::cout << "Running on port " << port << '\n';
+  unsigned short api_port = config::default_api_port;
+  if (args["--api_port"]) {
+    try {
+      api_port = static_cast<unsigned short>(args["--api_port"].asLong());
+    } catch (...) {
+    }
+  }
 
-  Fiery fiery(port);
-  int ret = fiery.run();
+  Mud::Logger::getLogger()->info("Running on port {}.\n", port);
+  Mud::Logger::getLogger()->info("API on port {}.\n", api_port);
 
-  //Use the default logger (stdout, multi-threaded, colored)
-  // spdlog::info("Hello, {}!", "World");
+  Mud::Fiery fiery(port, api_port);
+  fiery.run();
 
-  // fmt::print("Hello, from {}\n", "{fmt}");
-
-  return ret;
+  return 0;
 }

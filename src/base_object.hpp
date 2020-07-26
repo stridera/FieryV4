@@ -12,6 +12,7 @@
 #pragma once
 
 #include <string>
+namespace Mud {
 
 class BaseObject
 {
@@ -24,3 +25,5 @@ public:
   BaseObject();
   ~BaseObject() = default;
 };
+
+}// namespace Mud

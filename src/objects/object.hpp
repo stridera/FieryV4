@@ -2,6 +2,7 @@
 
 #include "../base_object.hpp"
 
+namespace Mud::Object {
 class Object : BaseObject
 {
 private:
@@ -10,3 +11,5 @@ public:
   Object(/* args */);
   ~Object();
 };
+
+}

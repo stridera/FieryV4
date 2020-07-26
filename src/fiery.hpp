@@ -1,35 +1,56 @@
 #pragma once
 
-#include <string>
+#include <boost/asio.hpp>
+#include <string_view>
 
 #include "constants.hpp"
-#include "server/server.hpp"
-#include <boost/asio.hpp>
+#include "realm/realm.hpp"
+#include "server/listener.hpp"
+#include "server/session.hpp"
 
-enum class GameState {
-  BOOTING,
-  RUNNING,
-  RESTARTING,
-  SHUTTING_DOWN,
-};
-
+namespace Mud {
 
 /**
- * @brief The big cahoona.  The main game loops.  The king of the jungle.  You get it...
- * 
+ * @brief The big cahoona.  The main game loop.  The king of the jungle.  You get it...
  */
+
 class Fiery
 {
 public:
-  explicit Fiery(const unsigned short port);
+  explicit Fiery(const unsigned short mud_port, const unsigned short api_port)
+    : realm_(),
+      mudServer_(io_context_, mud_port),
+      apiServer_(io_context_, api_port),
+      tick_interval_(1),
+      ticker_(io_context_, tick_interval_)
+  {
+  }
+
   ~Fiery() = default;
 
-  int run();
+  void run()
+  {
+    tick();
+    io_context_.run();
+  }
+
+  void tick()
+  {
+    realm_.tick();
+
+    ticker_.expires_at(ticker_.expires_at() + tick_interval_);
+    ticker_.async_wait([this](const boost::system::error_code &) {
+      tick();
+    });
+  }
 
 private:
-  bool _isWizlocked = false;
-  GameState _state = GameState::BOOTING;
-
-  boost::asio::io_context mud_io_context;
-  Server _mudServer;
+  boost::asio::io_context io_context_;
+  Realm::Realm realm_;
+  Server::Listener<Server::Session> mudServer_;
+  Server::Listener<Server::Session> apiServer_;
+  boost::posix_time::seconds tick_interval_;
+  boost::asio::deadline_timer ticker_;
 };
+
+}// Namespace Mud

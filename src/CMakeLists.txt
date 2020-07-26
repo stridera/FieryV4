@@ -7,8 +7,8 @@ add_executable(fierymud
   realm/zone.cpp
   realm/room.cpp
   realm/shop.cpp
-  server/server.cpp
-  server/session.cpp
+  server/listener.cpp
+  logging/log.cpp
   )
 
 if (WERROR)
